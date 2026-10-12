@@ -1,0 +1,4 @@
+interface:
+  display_name: "SOP Evidence Auditor"
+  short_description: "Audit local SOP packages, resolve exact citations and grade ob"
+  default_prompt: "Use $audit-sop-evidence on the local example in this repository."

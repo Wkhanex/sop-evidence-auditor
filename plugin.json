@@ -1,0 +1,25 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "sop-evidence-auditor",
+  "version": "0.1.0",
+  "description": "Audit local SOP packages, resolve exact citations and grade observable action traces.",
+  "author": {
+    "name": "Waleed Khan"
+  },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "SOP Evidence Auditor",
+        "shortDescription": "Audit evidence and score runs",
+        "longDescription": "Audit local SOP packages, resolve exact citations and grade observable action traces.",
+        "developerName": "Waleed Khan",
+        "category": "Productivity",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "defaultPrompt": "Use $audit-sop-evidence on the local example in this repository."
+      }
+    }
+  }
+}

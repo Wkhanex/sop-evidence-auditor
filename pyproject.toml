@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sop-evidence-auditor"
+version = "0.1.0"
+description = "Audit local SOP packages, resolve exact citations and grade observable action traces."
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Waleed Khan"}]
+dependencies = []
+
+[project.scripts]
+evidence-auditor = "evidence_auditor.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["evidence_auditor*"]

@@ -1,0 +1,61 @@
+{
+  "pass_percent": 80,
+  "criteria": [
+    {
+      "id": "C1",
+      "kind": "accepted_action",
+      "action": "resubmit",
+      "target_id": "HELP-41",
+      "clause": "4.3",
+      "weight": 2,
+      "required": true
+    },
+    {
+      "id": "C2",
+      "kind": "accepted_action",
+      "action": "approve",
+      "target_id": "HELP-41",
+      "clause": "4.4",
+      "weight": 2,
+      "required": true
+    },
+    {
+      "id": "C3",
+      "kind": "action_before",
+      "action": "approve",
+      "before_action": "schedule",
+      "target_id": "HELP-41",
+      "clause": "4.4",
+      "weight": 3,
+      "required": true
+    },
+    {
+      "id": "C4",
+      "kind": "final_state",
+      "state": "scheduled",
+      "target_id": "HELP-41",
+      "clause": "4.5",
+      "weight": 3,
+      "required": true
+    },
+    {
+      "id": "C5",
+      "kind": "evidence_used",
+      "action": "schedule",
+      "evidence_id": "SLOT-7",
+      "target_id": "HELP-41",
+      "clause": "4.5",
+      "weight": 2
+    },
+    {
+      "id": "C6",
+      "kind": "action_absent",
+      "action": "assign",
+      "target_id": "HELP-41",
+      "clause": "4.6",
+      "weight": 2,
+      "required": true,
+      "actor_id": "OPS"
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "scenario_id": "guest-access-review",
+  "clock": "2026-09-14T09:30:00+01:00",
+  "actors": [
+    {
+      "id": "OPS",
+      "name": "Alice Benton",
+      "roles": [
+        "operations"
+      ]
+    },
+    {
+      "id": "MANAGER",
+      "name": "Mira Shaw",
+      "roles": [
+        "manager"
+      ]
+    },
+    {
+      "id": "HELPDESK",
+      "name": "Oliver Nash",
+      "roles": [
+        "helpdesk"
+      ]
+    }
+  ],
+  "records": [
+    {
+      "id": "CONTACT-12",
+      "service": "directory",
+      "type": "individual-identity",
+      "at": "2026-09-13T15:10:00+01:00",
+      "actor_id": "OPS",
+      "body": {
+        "full_name": "Morgan Vale",
+        "request_id": "HELP-41"
+      },
+      "refs": []
+    },
+    {
+      "id": "HELP-41",
+      "service": "tickets",
+      "type": "guest-request",
+      "at": "2026-09-14T09:10:00+01:00",
+      "actor_id": "OPS",
+      "body": {
+        "status": "returned",
+        "individual_id": "CONTACT-12"
+      },
+      "refs": [
+        "CONTACT-12"
+      ]
+    },
+    {
+      "id": "SLOT-7",
+      "service": "tickets",
+      "type": "helpdesk-slot",
+      "at": "2026-09-14T09:25:00+01:00",
+      "actor_id": "HELPDESK",
+      "body": {
+        "request_id": "HELP-41",
+        "approved": true,
+        "earliest_date": "2026-09-17"
+      },
+      "refs": [
+        "HELP-41"
+      ]
+    }
+  ],
+  "clauses": [
+    {
+      "id": "4.3",
+      "text": "Use the individual identity record when resubmitting a returned guest request."
+    },
+    {
+      "id": "4.4",
+      "text": "A manager must approve the resubmitted request before scheduling."
+    },
+    {
+      "id": "4.5",
+      "text": "Schedule only after Help Desk posts an approved slot for the same request. Complete scheduling by 10:30 BST on 14 September 2026."
+    },
+    {
+      "id": "4.6",
+      "text": "Help Desk assigns the guest account after the request is scheduled."
+    }
+  ],
+  "workflow": {
+    "initial_states": {
+      "HELP-41": "returned"
+    },
+    "transitions": [
+      {
+        "action": "resubmit",
+        "from": "returned",
+        "to": "pending",
+        "role": "operations",
+        "clause": "4.3",
+        "evidence": [
+          {
+            "type": "individual-identity",
+            "body": {
+              "request_id": "HELP-41"
+            }
+          }
+        ]
+      },
+      {
+        "action": "approve",
+        "from": "pending",
+        "to": "approved",
+        "role": "manager",
+        "clause": "4.4",
+        "requires_actions": [
+          "resubmit"
+        ]
+      },
+      {
+        "action": "schedule",
+        "from": "approved",
+        "to": "scheduled",
+        "role": "operations",
+        "clause": "4.5",
+        "requires_actions": [
+          "approve"
+        ],
+        "deadline": "2026-09-14T10:30:00+01:00",
+        "evidence": [
+          {
+            "type": "helpdesk-slot",
+            "role": "helpdesk",
+            "body": {
+              "request_id": "HELP-41",
+              "approved": true
+            }
+          }
+        ]
+      },
+      {
+        "action": "assign",
+        "from": "scheduled",
+        "to": "assigned",
+        "role": "helpdesk",
+        "clause": "4.6",
+        "requires_actions": [
+          "schedule"
+        ]
+      }
+    ]
+  },
+  "absences": [
+    {
+      "service": "calendar",
+      "type": "existing-booking",
+      "reason": "No booking has been made for this request."
+    }
+  ]
+}

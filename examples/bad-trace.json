@@ -1,0 +1,50 @@
+{
+  "events": [
+    {
+      "id": "E1",
+      "action": "resubmit",
+      "target_id": "HELP-41",
+      "actor_id": "OPS",
+      "at": "2026-09-14T09:31:00+01:00",
+      "evidence_ids": [
+        "CONTACT-12"
+      ]
+    },
+    {
+      "id": "E2",
+      "action": "schedule",
+      "target_id": "HELP-41",
+      "actor_id": "OPS",
+      "at": "2026-09-14T09:32:00+01:00",
+      "evidence_ids": [
+        "SLOT-7"
+      ]
+    },
+    {
+      "id": "E3",
+      "action": "approve",
+      "target_id": "HELP-41",
+      "actor_id": "MANAGER",
+      "at": "2026-09-14T09:34:00+01:00",
+      "evidence_ids": []
+    },
+    {
+      "id": "E4",
+      "action": "schedule",
+      "target_id": "HELP-41",
+      "actor_id": "OPS",
+      "at": "2026-09-14T09:35:00+01:00",
+      "evidence_ids": [
+        "CONTACT-12"
+      ]
+    },
+    {
+      "id": "E5",
+      "action": "assign",
+      "target_id": "HELP-41",
+      "actor_id": "OPS",
+      "at": "2026-09-14T09:36:00+01:00",
+      "evidence_ids": []
+    }
+  ]
+}
